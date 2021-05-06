@@ -1,0 +1,50 @@
+<?xml version="1.0" ?><!--
+  This program template only outputs a singlet s file, so if you wish to submit to multiple 
+  sub-challenges, replicate the 'OUTPUT_FILE_1' in the command line and the 
+  'outputs' section, or make one tool template per subchallenge
+  
+  --><tool id="SVClone_filter" name="SVClone Step 1 - Subsample Filter" version="1.0.0">
+
+	<description> The filter submodule prepares SNVs for filtering </description>
+
+	<requirements>
+		<container type="docker">docker.synapse.org/syn2813581/6613462/svclone-tool</container>
+	</requirements>
+	
+      <stdio>
+        <exit_code range="1:"/>
+    </stdio>
+
+	<command>
+	<![CDATA[
+        python /opt/svclone/SVclone.py filter
+        -cfg /opt/svclone/svclone_config.ini
+        --snvs ${SNV_file}
+        --snv_format ${SNV_format}
+        -s tumor
+        -c ${battenberg_subclones_txt}
+        -p ${purity_ploidy_ccube}
+        -o .
+	]]></command>
+
+	<inputs>
+	    <param format="tabular" help="SNVs in VCF format" label="VCF file" name="SNV_file" type="data"/>
+        <param help="Specify VCF input format; choose MuTect for SMC-het challenge" label="VCF input format" name="SNV_format" type="select">
+        <option selected="True" value="mutect">MuTect</option>
+        <option value="sanger">sanger</option>
+        <option value="mutect_callstats">callstats_mutect</option>
+        </param>
+        <param format="text" help="purity_ploidy generated in Step 1" label="purity_ploidy" name="purity_ploidy_ccube" type="data"/>
+        <param format="tabular" help="Battenberg file containing segmented copy-numbers for patient sample" label="Battenberg file" name="battenberg_subclones_txt" type="data"/>
+    </inputs>
+
+	<outputs>
+		<data format="txt" from_work_dir="tumor_filtered_snvs.tsv" label="tumor_sub_filtered_snvs.tsv" name="tumor_filtered_snvs"/> 
+        <data format="txt" from_work_dir="purity_ploidy.txt" label="purity_ploidy.txt" name="purity_ploidy_out"/>
+	</outputs>
+  
+	<help>
+Please refer to README for further info, available at: https://bitbucket.org/mcmero/svclone
+	</help>
+
+</tool>

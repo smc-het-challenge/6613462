@@ -1,0 +1,41 @@
+<?xml version="1.0" ?><tool id="SVClone_assign" name="SVClone Step 4 - Posthoc assignment" version="0.1.0">
+
+    <requirements>
+        <container type="docker">docker.synapse.org/syn2813581/6613462/svclone-tool-3</container>
+    </requirements>
+
+    <stdio>
+        <exit_code range="1:"/>
+    </stdio>
+
+    <command><![CDATA[
+        /opt/svclone/assign_remaining.R 
+        $(nosub_filter)
+        $(input_vcf)
+        $(sub_filter)
+        $(sub_2A) 
+        $(sub_1C)
+        $(sub_1A)
+
+    ]]></command>
+
+    <inputs>
+        <param format="txt" label="total filter output" name="nosub_filter" type="data"/>
+        <param format="vcf" label="VCF file" name="input_vcf" type="data"/>
+        <param format="txt" label="sub_sampled filter output" name="sub_filter" type="data"/>
+        <param format="txt" label="sub_sampled 2A output" name="sub_2A" type="data"/>
+        <param format="txt" label="sub_sampled 1C output" name="sub_1C" type="data"/>
+        <param format="txt" label="sub_sampled 1A output" name="sub_1A" type="data"/>
+    </inputs>
+
+    <outputs>
+    	<data format="txt" from_work_dir="smc_1B_number_of_clusters.txt" label="smc_1B_number_of_clusters.txt" name="smc_1B"/>
+    	<data format="txt" from_work_dir="smc_1C_cluster_structure.txt" label="smc_1C_cluster_structure.txt" name="smc_1C"/>
+    	<data format="txt" from_work_dir="smc_2A_mutations_to_clusters.txt" label="smc_2A_mutations_to_clusters.txt" name="smc_2A"/>
+    </outputs>
+
+    <help><![CDATA[
+        ccube purity tool - please see github for help: https://github.com/keyuan/ccube.git
+    ]]></help>
+
+</tool>

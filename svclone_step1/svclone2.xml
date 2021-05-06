@@ -1,0 +1,39 @@
+<?xml version="1.0" ?><tool id="SVClone_cluster" name="SVClone Step 2 - Subsample Cluster" version="1.0.0">
+
+      <stdio>
+        <exit_code range="1:"/>
+    </stdio>
+
+	<description>The clustering submodule performs the clustering of the variants, optionally with SNVs</description>
+	
+	<requirements>
+		<container type="docker">docker.synapse.org/syn2813581/6613462/svclone-tool</container>
+	</requirements>
+
+	<command>
+	<![CDATA[
+        python /opt/svclone/SVclone.py cluster 
+        -cfg /opt/svclone/svclone_config.ini
+        -s tumor
+        -p ${purity_ploidy}
+        --snvs ${tumor_subsample_filtered_snvs}
+	]]></command>
+
+	<inputs>
+	    <param format="text" help="purity_ploidy generated in Step 2; note this is NOT the same as the tumor purity output from Step 1" label="Tumor purity" name="purity_ploidy" type="data"/>
+	    <param format="tsv" help="tumor_filtered_snvs generated in Step 2" label="tumor_subsample_filtered_snvs" name="tumor_subsample_filtered_snvs" type="data"/>
+	</inputs>
+
+	<outputs>
+		<data format="txt" from_work_dir="tumor/best_run_snvs/smc_1A_cellularity.txt" label="smc_1A_cellularity.txt" name="1A"/>
+		<data format="txt" from_work_dir="tumor/best_run_snvs/smc_1B_number_of_clusters.txt" label="smc_1B_number_of_clusters.txt" name="1B"/>
+		<data format="txt" from_work_dir="tumor/best_run_snvs/smc_1C_cluster_structure.txt" label="smc_1C_cluster_structure.txt" name="1C"/>
+		<data format="txt" from_work_dir="tumor/best_run_snvs/smc_2A_mutations_to_clusters.txt" label="smc_2A_mutations_to_clusters.txt" name="2A"/>
+		    <data format="zip" from_work_dir="tumor.tar.gz" label="tumor.tar.gz" name="output_zip_file"/>
+	</outputs>
+
+	<help>
+Please refer to README for further info, available at: https://bitbucket.org/mcmero/svclone
+	</help>
+
+</tool>

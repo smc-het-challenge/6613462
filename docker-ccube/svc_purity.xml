@@ -1,0 +1,30 @@
+<?xml version="1.0" ?><tool id="SVClone_purity" name="SVClone Step 0 - Purity" version="0.1.0">
+
+    <requirements>
+        <container type="docker">docker.synapse.org/syn2813581/6613462/docker-ccube</container>
+    </requirements>
+
+    <stdio>
+        <exit_code range="1:"/>
+    </stdio>
+
+    <command><![CDATA[
+        run_purity.R
+        $(input_vcf)
+        $(battenberg_file)
+    ]]></command>
+
+    <inputs>
+        <param format="vcf" label="VCF file" name="input_vcf" type="data"/>
+        <param format="tabular" label="Battenberg file" name="battenberg_file" type="data"/>
+    </inputs>
+
+    <outputs>
+    	<data format="txt" from_work_dir="purity_ploidy_ccube.txt" label="purity_ploidy_ccube.txt" name="purity_ploidy_ccube"/>
+    </outputs>
+
+    <help><![CDATA[
+        ccube purity tool - please see github for help: https://github.com/keyuan/ccube.git
+    ]]></help>
+
+</tool>

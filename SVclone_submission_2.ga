@@ -1,0 +1,422 @@
+{
+    "a_galaxy_workflow": "true", 
+    "format-version": "0.1", 
+    "name": "SVclone_submission_2", 
+    "steps": {
+        "1": {
+            "tool_id": null, 
+            "content_id": null, 
+            "uuid": "ba649fd6-eb9d-4859-93ed-8c12fc667f12", 
+            "tool_version": null, 
+            "outputs": [], 
+            "workflow_outputs": [], 
+            "annotation": "", 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "VCF_INPUT"
+                }
+            ], 
+            "tool_errors": null, 
+            "position": {
+                "top": 498, 
+                "left": 285
+            }, 
+            "tool_state": "{\"name\": \"VCF_INPUT\"}", 
+            "label": null, 
+            "type": "data_input", 
+            "id": 1, 
+            "name": "Input dataset"
+        }, 
+        "0": {
+            "tool_id": null, 
+            "content_id": null, 
+            "uuid": "fe5fc44a-37b9-47b4-a5c0-42983e602016", 
+            "tool_version": null, 
+            "outputs": [], 
+            "workflow_outputs": [], 
+            "annotation": "", 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "CNA_INPUT"
+                }
+            ], 
+            "tool_errors": null, 
+            "position": {
+                "top": 224, 
+                "left": 315
+            }, 
+            "tool_state": "{\"name\": \"CNA_INPUT\"}", 
+            "label": null, 
+            "type": "data_input", 
+            "id": 0, 
+            "name": "Input dataset"
+        }, 
+        "3": {
+            "tool_id": "SVClone_filter", 
+            "content_id": "SVClone_filter", 
+            "uuid": "e9cc98f8-ca86-467a-9524-35add698fcbe", 
+            "tool_version": "1.0.0", 
+            "outputs": [
+                {
+                    "type": "txt", 
+                    "name": "tumor_filtered_snvs"
+                }, 
+                {
+                    "type": "txt", 
+                    "name": "purity_ploidy_out"
+                }
+            ], 
+            "post_job_actions": {
+                "HideDatasetActiontumor_filtered_snvs": {
+                    "output_name": "tumor_filtered_snvs", 
+                    "action_type": "HideDatasetAction", 
+                    "action_arguments": {}
+                }, 
+                "HideDatasetActionpurity_ploidy_out": {
+                    "output_name": "purity_ploidy_out", 
+                    "action_type": "HideDatasetAction", 
+                    "action_arguments": {}
+                }
+            }, 
+            "workflow_outputs": [], 
+            "annotation": "", 
+            "input_connections": {
+                "SNV_file": {
+                    "output_name": "output", 
+                    "id": 1
+                }, 
+                "battenberg_subclones_txt": {
+                    "output_name": "output", 
+                    "id": 0
+                }, 
+                "purity_ploidy_ccube": {
+                    "output_name": "purity_ploidy_ccube", 
+                    "id": 2
+                }
+            }, 
+            "inputs": [], 
+            "tool_errors": null, 
+            "position": {
+                "top": 202, 
+                "left": 1088
+            }, 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"SNV_format\": \"\\\"mutect\\\"\", \"SNV_file\": \"null\", \"battenberg_subclones_txt\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy/galaxy-app/tool-data/shared/ucsc/chrom/?.len\\\"\", \"purity_ploidy_ccube\": \"null\"}", 
+            "label": null, 
+            "type": "tool", 
+            "id": 3, 
+            "name": "SVClone Step 1 - Subsample Filter"
+        }, 
+        "2": {
+            "tool_id": "SVClone_purity", 
+            "content_id": "SVClone_purity", 
+            "uuid": "d9e422f4-5272-49c1-9a58-a79912380ff6", 
+            "tool_version": "0.1.0", 
+            "outputs": [
+                {
+                    "type": "txt", 
+                    "name": "purity_ploidy_ccube"
+                }
+            ], 
+            "post_job_actions": {
+                "HideDatasetActionpurity_ploidy_ccube": {
+                    "output_name": "purity_ploidy_ccube", 
+                    "action_type": "HideDatasetAction", 
+                    "action_arguments": {}
+                }
+            }, 
+            "workflow_outputs": [], 
+            "annotation": "", 
+            "input_connections": {
+                "input_vcf": {
+                    "output_name": "output", 
+                    "id": 1
+                }, 
+                "battenberg_file": {
+                    "output_name": "output", 
+                    "id": 0
+                }
+            }, 
+            "inputs": [], 
+            "tool_errors": null, 
+            "position": {
+                "top": 145, 
+                "left": 729
+            }, 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy/galaxy-app/tool-data/shared/ucsc/chrom/?.len\\\"\", \"input_vcf\": \"null\", \"battenberg_file\": \"null\"}", 
+            "label": null, 
+            "type": "tool", 
+            "id": 2, 
+            "name": "SVClone Step 0 - Purity"
+        }, 
+        "5": {
+            "tool_id": "SVClone_cluster", 
+            "content_id": "SVClone_cluster", 
+            "uuid": "51c5147b-2edc-4cb6-9ea6-e9917cb1c833", 
+            "tool_version": "1.0.0", 
+            "outputs": [
+                {
+                    "type": "txt", 
+                    "name": "1A"
+                }, 
+                {
+                    "type": "txt", 
+                    "name": "1B"
+                }, 
+                {
+                    "type": "txt", 
+                    "name": "1C"
+                }, 
+                {
+                    "type": "txt", 
+                    "name": "2A"
+                }, 
+                {
+                    "type": "zip", 
+                    "name": "output_zip_file"
+                }
+            ], 
+            "post_job_actions": {
+                "HideDatasetAction1B": {
+                    "output_name": "1B", 
+                    "action_type": "HideDatasetAction", 
+                    "action_arguments": {}
+                }, 
+                "HideDatasetAction1C": {
+                    "output_name": "1C", 
+                    "action_type": "HideDatasetAction", 
+                    "action_arguments": {}
+                }, 
+                "HideDatasetAction2A": {
+                    "output_name": "2A", 
+                    "action_type": "HideDatasetAction", 
+                    "action_arguments": {}
+                }, 
+                "HideDatasetAction1A": {
+                    "output_name": "1A", 
+                    "action_type": "HideDatasetAction", 
+                    "action_arguments": {}
+                }, 
+                "HideDatasetActionoutput_zip_file": {
+                    "output_name": "output_zip_file", 
+                    "action_type": "HideDatasetAction", 
+                    "action_arguments": {}
+                }
+            }, 
+            "workflow_outputs": [], 
+            "annotation": "", 
+            "input_connections": {
+                "purity_ploidy": {
+                    "output_name": "purity_ploidy_out", 
+                    "id": 3
+                }, 
+                "tumor_subsample_filtered_snvs": {
+                    "output_name": "tumor_filtered_snvs", 
+                    "id": 3
+                }
+            }, 
+            "inputs": [], 
+            "tool_errors": null, 
+            "position": {
+                "top": 176, 
+                "left": 1562
+            }, 
+            "tool_state": "{\"__page__\": 0, \"purity_ploidy\": \"null\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy/galaxy-app/tool-data/shared/ucsc/chrom/?.len\\\"\", \"tumor_subsample_filtered_snvs\": \"null\"}", 
+            "label": null, 
+            "type": "tool", 
+            "id": 5, 
+            "name": "SVClone Step 2 - Subsample Cluster"
+        }, 
+        "4": {
+            "tool_id": "SVClone_filter_2", 
+            "content_id": "SVClone_filter_2", 
+            "uuid": "99680305-0826-4d9f-b600-dbbbe6f3eedb", 
+            "tool_version": "1.0.0", 
+            "outputs": [
+                {
+                    "type": "txt", 
+                    "name": "tumor_filtered_snvs"
+                }, 
+                {
+                    "type": "txt", 
+                    "name": "purity_ploidy_total"
+                }
+            ], 
+            "post_job_actions": {
+                "HideDatasetActionpurity_ploidy_total": {
+                    "output_name": "purity_ploidy_total", 
+                    "action_type": "HideDatasetAction", 
+                    "action_arguments": {}
+                }, 
+                "HideDatasetActiontumor_filtered_snvs": {
+                    "output_name": "tumor_filtered_snvs", 
+                    "action_type": "HideDatasetAction", 
+                    "action_arguments": {}
+                }
+            }, 
+            "workflow_outputs": [], 
+            "annotation": "", 
+            "input_connections": {
+                "SNV_file": {
+                    "output_name": "output", 
+                    "id": 1
+                }, 
+                "purity_ploidy": {
+                    "output_name": "purity_ploidy_ccube", 
+                    "id": 2
+                }, 
+                "battenberg_subclones_txt": {
+                    "output_name": "output", 
+                    "id": 0
+                }
+            }, 
+            "inputs": [], 
+            "tool_errors": null, 
+            "position": {
+                "top": 611, 
+                "left": 945
+            }, 
+            "tool_state": "{\"__page__\": 0, \"purity_ploidy\": \"null\", \"SNV_format\": \"\\\"mutect\\\"\", \"SNV_file\": \"null\", \"battenberg_subclones_txt\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy/galaxy-app/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null}", 
+            "label": null, 
+            "type": "tool", 
+            "id": 4, 
+            "name": "SVClone Step 3 - Filter All"
+        }, 
+        "7": {
+            "tool_id": "smc_het_eval", 
+            "content_id": "smc_het_eval", 
+            "uuid": "2a276285-cf23-40bd-88a4-1af78f39633b", 
+            "tool_version": "0.1.0", 
+            "outputs": [
+                {
+                    "type": "txt", 
+                    "name": "outfile"
+                }
+            ], 
+            "post_job_actions": {}, 
+            "workflow_outputs": [
+                {
+                    "output_name": "outfile", 
+                    "uuid": "936bd0a5-a76c-4e1f-94b3-71792c57bdb9", 
+                    "label": "OUTPUT"
+                }
+            ], 
+            "annotation": "", 
+            "input_connections": {
+                "proportion|predfile": {
+                    "output_name": "smc_1C", 
+                    "id": 6
+                }, 
+                "cellularity|predfile": {
+                    "output_name": "1A", 
+                    "id": 5
+                }, 
+                "cluster_assignment|predfile": {
+                    "output_name": "smc_2A", 
+                    "id": 6
+                }, 
+                "population|predfile": {
+                    "output_name": "smc_1B", 
+                    "id": 6
+                }
+            }, 
+            "inputs": [
+                {
+                    "name": "sample", 
+                    "description": "runtime parameter for tool SMC-Het Evaluator"
+                }
+            ], 
+            "tool_errors": null, 
+            "position": {
+                "top": 203, 
+                "left": 2391
+            }, 
+            "tool_state": "{\"cocluster_assignment\": \"{\\\"submit\\\": \\\"no\\\", \\\"__current_case__\\\": 1}\", \"__page__\": 0, \"approx\": \"{\\\"enable\\\": \\\"no\\\", \\\"__current_case__\\\": 1}\", \"__rerun_remap_job_id__\": null, \"proportion\": \"{\\\"predfile\\\": null, \\\"submit\\\": \\\"yes\\\", \\\"__current_case__\\\": 0}\", \"sample\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"cellularity\": \"{\\\"predfile\\\": null, \\\"submit\\\": \\\"yes\\\", \\\"__current_case__\\\": 0}\", \"cluster_assignment\": \"{\\\"predfile\\\": null, \\\"phylogeny\\\": {\\\"submit\\\": \\\"no\\\", \\\"__current_case__\\\": 1}, \\\"submit\\\": \\\"yes\\\", \\\"__current_case__\\\": 0}\", \"population\": \"{\\\"predfile\\\": null, \\\"submit\\\": \\\"yes\\\", \\\"__current_case__\\\": 0}\"}", 
+            "label": null, 
+            "type": "tool", 
+            "id": 7, 
+            "name": "SMC-Het Evaluator"
+        }, 
+        "6": {
+            "tool_id": "SVClone_assign", 
+            "content_id": "SVClone_assign", 
+            "uuid": "1fa9d88f-8f07-40a7-b535-2b21e8ed0b25", 
+            "tool_version": "0.1.0", 
+            "outputs": [
+                {
+                    "type": "txt", 
+                    "name": "smc_1B"
+                }, 
+                {
+                    "type": "txt", 
+                    "name": "smc_1C"
+                }, 
+                {
+                    "type": "txt", 
+                    "name": "smc_2A"
+                }
+            ], 
+            "post_job_actions": {
+                "HideDatasetActionsmc_1B": {
+                    "output_name": "smc_1B", 
+                    "action_type": "HideDatasetAction", 
+                    "action_arguments": {}
+                }, 
+                "HideDatasetActionsmc_1C": {
+                    "output_name": "smc_1C", 
+                    "action_type": "HideDatasetAction", 
+                    "action_arguments": {}
+                }, 
+                "HideDatasetActionsmc_2A": {
+                    "output_name": "smc_2A", 
+                    "action_type": "HideDatasetAction", 
+                    "action_arguments": {}
+                }
+            }, 
+            "workflow_outputs": [], 
+            "annotation": "", 
+            "input_connections": {
+                "sub_1A": {
+                    "output_name": "1A", 
+                    "id": 5
+                }, 
+                "sub_1C": {
+                    "output_name": "1C", 
+                    "id": 5
+                }, 
+                "nosub_filter": {
+                    "output_name": "tumor_filtered_snvs", 
+                    "id": 4
+                }, 
+                "sub_filter": {
+                    "output_name": "tumor_filtered_snvs", 
+                    "id": 3
+                }, 
+                "sub_2A": {
+                    "output_name": "2A", 
+                    "id": 5
+                }, 
+                "input_vcf": {
+                    "output_name": "output", 
+                    "id": 1
+                }
+            }, 
+            "inputs": [], 
+            "tool_errors": null, 
+            "position": {
+                "top": 451, 
+                "left": 1917
+            }, 
+            "tool_state": "{\"__page__\": 0, \"sub_1A\": \"null\", \"sub_1C\": \"null\", \"__rerun_remap_job_id__\": null, \"nosub_filter\": \"null\", \"sub_filter\": \"null\", \"sub_2A\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy/galaxy-app/tool-data/shared/ucsc/chrom/?.len\\\"\", \"input_vcf\": \"null\"}", 
+            "label": null, 
+            "type": "tool", 
+            "id": 6, 
+            "name": "SVClone Step 4 - Posthoc assignment"
+        }
+    }, 
+    "annotation": "", 
+    "uuid": "0d127a84-f701-466f-aeca-d18f9b08304c"
+}
